@@ -98,6 +98,7 @@ export class CreateFormComponent implements OnInit {
         this.breakfastDishes = element.dish
       }
     });
+    console.log(this.breakfastDishes)
   }
 
   onSelectBreakfast(){
