@@ -1,16 +1,11 @@
 <div class="create-form" ibmGrid>
-	<div class="body-text" ibmRow>
-		<div ibmCol [columnNumbers]="{'lg': 6, 'md': 12, 'sm': 12}">
-			<p>
-				--Image--
-			</p>
-		</div>
-	</div>
-
+	
 	<form [formGroup]="createOrder">
 		<div ibmRow>
-			<div ibmCol>
-				<button [ibmButton]="ibmButton" [size]="size" (click)="save()">Save</button>
+			<div ibmCol [columnNumbers]="{'lg': 9, 'md': 12, 'sm': 12}"></div>
+			<div ibmCol [columnNumbers]="{'lg': 3, 'md': 12, 'sm': 12}">
+				<button class="bx--btn bx--btn--primary bx--btn--sm"
+				type="button" style="width:50px" (click)="save()">Save</button>
 			</div>
 		</div>
 		<ibm-tabs [isNavigation]="false">
