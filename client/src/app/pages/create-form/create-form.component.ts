@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PaginationModel,TableModel } from 'carbon-components-angular';
+import { DataServiceService } from 'src/app/services/data-service.service';
 
 @Component({
   selector: 'app-create-form',
@@ -51,7 +52,7 @@ export class CreateFormComponent implements OnInit {
   checkedToppings = []
   dinnerRadio;
 
-  constructor(private formBuilder: FormBuilder, private simpleModel: TableModel){}
+  constructor(private formBuilder: FormBuilder, private simpleModel: TableModel, private databaseService: DataServiceService){}
 
   @Input() model = new PaginationModel();
 	@Input() disabled = false;
@@ -192,6 +193,16 @@ export class CreateFormComponent implements OnInit {
     finalInputs["dinner"] = this.checkedToppings
 
     console.log(finalInputs);
+    let body = {
+      "orderPlaced" : finalInputs
+    }
+
+    this.databaseService.postRequest(this.databaseService.BASE_URL + "/saveToMongo", body)
+      .subscribe(data => {
+
+      }, err => {
+        console.log("Error while saving order to mongo")
+      });
   }
 
 
