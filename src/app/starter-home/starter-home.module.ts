@@ -6,7 +6,8 @@ import {
 	GridModule,
 	ListModule,
 	TabsModule,
-	TilesModule
+	TilesModule,
+	ButtonModule
 } from 'carbon-components-angular';
 import { StarterHomeRoutingModule } from './starter-home-routing.module';
 
@@ -17,7 +18,8 @@ import { StarterHomeRoutingModule } from './starter-home-routing.module';
 		GridModule,
 		ListModule,
 		TabsModule,
-		TilesModule
+		TilesModule,
+		ButtonModule
 	],
 	declarations: [StarterHomeComponent]
 })

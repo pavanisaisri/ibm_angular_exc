@@ -1,0 +1,141 @@
+<div class="create-form" ibmGrid>
+	<div class="body-text" ibmRow>
+		<div ibmCol [columnNumbers]="{'lg': 6, 'md': 12, 'sm': 12}">
+			<p>
+				--Image--
+			</p>
+		</div>
+	</div>
+
+	<form [formGroup]="createOrder">
+		<div ibmRow>
+			<div ibmCol>
+				<button [ibmButton]="ibmButton" [size]="size" (click)="save()">Save</button>
+			</div>
+		</div>
+		<ibm-tabs [isNavigation]="false">
+
+			<ibm-tab heading="Breakfast"><br>
+				<p>Breakfast</p><br><br>
+				<div ibmRow>
+					<div ibmCol [columnNumbers]="{'md': 6, 'sm': 12}">
+						<legend class="bx--label"><strong>Please select a Cuisine</strong></legend>
+						<ibm-radio-group name = "breakfastCuisine" formControlName="breakfastCuisine" (change)="onChangeBreakfast()">
+							<ibm-radio *ngFor="let cuisine of breakfasts"
+								[value]="cuisine.name" (click)='breakfastRadio = cuisine.name'>{{cuisine.name}}
+							</ibm-radio>
+						</ibm-radio-group>
+					</div>
+				</div>
+				<br>
+				<legend class="bx--label"><strong>Please select dishes and side dishes for {{breakfastRadio}} cuisine</strong></legend>
+				<br>
+				<div ibmRow>
+					<div ibmCol [columnNumbers]="{'lg': 4,'md': 4, 'sm': 12}" >
+						<legend class="bx--label"><strong>Please select a dish</strong></legend>
+						<div style="width: 300px">
+							<ibm-dropdown placeholder="Select" name = "breakfastDish"
+							formControlName="breakfastDish" (selected)="onSelectBreakfast()"> 
+								<ibm-dropdown-list [items]="breakfastDishes"></ibm-dropdown-list>
+							</ibm-dropdown>
+						</div>
+					</div>
+
+					<div ibmCol [columnNumbers]="{'lg': 8,'md': 8, 'sm': 12}" >
+						<legend class="bx--label"><strong>Please enter a side dish</strong></legend>
+						
+						<input ibmText name = "breakfastSideDish" formControlName="breakfastSideDish" style="width:300px">
+						
+					</div>
+				</div>
+			</ibm-tab>
+
+			<ibm-tab heading="Lunch"><br>
+				<p>Lunch</p><br><br>
+				<div ibmRow>
+					<div ibmCol [columnNumbers]="{'md': 6, 'sm': 12}">
+						<legend class="bx--label"><strong>Options</strong></legend>
+						<ibm-radio-group name = "lunchOption" formControlName="lunchOption" (change)="onChangeLunch()">
+							<ibm-radio *ngFor="let lunch of lunchOptions"
+								[value]="lunch.name" (click)='lunchRadio = lunch.name'>{{lunch.name}}
+							</ibm-radio>
+						</ibm-radio-group>
+					</div>
+				</div>
+				<br>
+				<legend class="bx--label"><strong>Please select dishes and side dishes for {{lunchRadio}}</strong></legend>
+				<br>
+				<div ibmRow>
+					<div ibmCol [columnNumbers]="{'lg': 4,'md': 4, 'sm': 12}" >
+						<legend class="bx--label"><strong>Please select a dish</strong></legend>
+						<div style="width: 300px">
+							<ibm-dropdown placeholder="Select" name = "lunchDish"
+							formControlName="lunchDish"> 
+								<ibm-dropdown-list [items]="lunchDishes"></ibm-dropdown-list>
+							</ibm-dropdown>
+						</div>
+					</div>
+
+					<div ibmCol [columnNumbers]="{'lg': 8,'md': 8, 'sm': 12}" >
+						<legend class="bx--label"><strong>Please enter a side dish</strong></legend>
+						
+						<input ibmText name = "lunchSideDish" formControlName="lunchSideDish" style="width:300px">
+						
+					</div>
+				</div>
+			</ibm-tab>
+
+			<ibm-tab heading="Dinner">
+				<p>Dinner</p><br>
+				
+				<div ibmRow>
+					<div ibmCol [columnNumbers]="{'md': 2, 'sm': 12}">
+						<legend class="bx--label"><strong>Please select all toppings to be used in this pizza</strong></legend>
+						<ibm-checkbox *ngFor="let item of dinnerToppings"  
+							(change)="onChangeTopping(item.topping,$event)">
+							{{item.topping}}
+						</ibm-checkbox>
+					</div>
+					<div ibmCol [columnNumbers]="{'md': 10, 'sm': 12}" style="width:750px">
+						<table ibmTable>
+							<thead ibmTableHead>
+								<tr>
+									<th>Topping</th>
+									<th>Need more customization</th>
+									<th>Weight</th>
+								</tr>
+							</thead>
+							<tbody ibmTableBody>
+								<tr *ngFor="let item of dinnerTableData">
+									<td>
+										{{item.topping}}
+									</td>
+									<td>
+										<ibm-radio-group (change)="onChangeDinner(item.topping,$event)">
+											<ibm-radio *ngFor="let r of ['Yes','No']"
+												[value]="r" (click)='dinnerRadio = r'>{{r}}
+											</ibm-radio>
+										</ibm-radio-group>
+									</td>
+									<td>
+										<input ibmText (input)="onChangeWeight(item.topping,$event.target.value)">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<ibm-pagination
+							[model]=model
+							[disabled]="disabled"
+							[pageInputDisabled]="pageInputDisabled"
+							[pagesUnknown]="pagesUnknown"
+							[skeleton]="skeleton"
+							[disabled]="disabled"
+							(selectPage)="selectPage($event)">
+						</ibm-pagination>
+					</div>
+					
+				</div>
+			</ibm-tab>
+		</ibm-tabs>
+	</form>
+</div>
