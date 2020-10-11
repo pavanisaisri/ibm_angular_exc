@@ -8,7 +8,17 @@ SERVICES.saveToMongo = (body) => {
             return data;
         })
         .catch(err => {
+            throw err;
+        })
+}
 
+SERVICES.getAllOrders = async () => {
+    return await mongoDAL.getAllOrders()
+        .then(data => {
+            return data;
+        })
+        .catch(err => {
+            throw err;
         })
 }
 

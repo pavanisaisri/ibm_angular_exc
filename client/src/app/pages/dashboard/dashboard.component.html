@@ -1,1 +1,38 @@
-<p>dashboard works!</p>
+<div ibmRow>
+    <div ibmCol [columnNumbers]="{'lg': 12, 'md': 12, 'sm': 12}">
+        <table ibmTable [sortable]="false">
+            <thead ibmTableHead>
+                <tr>
+                    <th
+                        ibmTableHeadCell
+                        *ngFor="let column of simpleModel.header"
+                        [column]="column">
+                    </th>
+                </tr>
+            </thead>
+            <tbody ibmTableBody>
+                <tr
+                    *ngFor="let row of orders"
+                    ibmTableRow
+                    [row]="row">
+                    <td
+                        *ngFor="let item of row; let j = index"
+                        ibmTableData
+                        [item]="item"
+                        [class]="simpleModel.header[j].className"
+                        [ngStyle]="simpleModel.header[j].style">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ibm-pagination *ngIf="this.allOrdersFromMongo.length>0"
+							[model]=model
+							[disabled]="disabled"
+							[pageInputDisabled]="pageInputDisabled"
+							[pagesUnknown]="pagesUnknown"
+							[skeleton]="skeleton"
+							[disabled]="disabled"
+							(selectPage)="selectPage($event)">
+						</ibm-pagination>
+    </div>
+</div>

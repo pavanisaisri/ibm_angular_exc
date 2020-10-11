@@ -30,6 +30,8 @@ import { SupportComponent } from './pages/support/support.component';
 import { Link1Component } from './pages/link1/link1.component';
 import { CreateFormComponent } from './pages/create-form/create-form.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DataServiceService } from './services/data-service.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
 	declarations: [
@@ -64,11 +66,12 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 		PaginationModule,
 		TableModule,
 		NFormsModule,
+		HttpClientModule
 	],
 	exports: [
 		ReactiveFormsModule
 	],
-	providers: [TableModel, PaginationModel],
+	providers: [TableModel, PaginationModel, DataServiceService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

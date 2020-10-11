@@ -19,4 +19,17 @@ router.post('/saveToMongo', (req, res) => {
           res.end();
       })
 })
+
+router.get('/getAllOrders', (req, res) => {
+  service.getAllOrders()
+      .then(data => {
+          res.json(data)
+      })
+      .catch(err => {
+          console.log(err);
+          res.status(500);
+          res.statusMessage = err.message;
+          res.end();
+      })
+})
 module.exports = router;
