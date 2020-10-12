@@ -1,20 +1,25 @@
 <div class="create-form" ibmGrid>
 	
-	<form [formGroup]="createOrder">
+	<form [formGroup]="createOrder" (submit)="save()">
 		<div ibmRow>
-			<div ibmCol [columnNumbers]="{'lg': 9, 'md': 12, 'sm': 12}"></div>
+			<div ibmCol [columnNumbers]="{'lg': 9, 'md': 12, 'sm': 12}">
+				<p>Please note that fields marked with <span style="color:red">*</span> are mandatory</p>
+			</div>
 			<div ibmCol [columnNumbers]="{'lg': 3, 'md': 12, 'sm': 12}">
-				<button class="bx--btn bx--btn--primary bx--btn--sm"
-				type="button" style="width:50px" (click)="save()">Save</button>
+				<!-- <button class="bx--btn bx--btn--primary bx--btn--sm"
+				type="button" style="width:50px" (click)="save()">Save</button> -->
+				<button class="bx--btn bx--btn--primary bx--btn--sm" 
+				type="submit" style="width:50px" [disabled]="!validator">Save</button>
 			</div>
 		</div>
-		<ibm-tabs [isNavigation]="false">
+		<ibm-tabs type="container" [followFocus]="true" [isNavigation]="false">
 
 			<ibm-tab heading="Breakfast"><br>
 				<p>Breakfast</p><br><br>
 				<div ibmRow>
 					<div ibmCol [columnNumbers]="{'md': 6, 'sm': 12}">
-						<legend class="bx--label"><strong>Please select a Cuisine</strong></legend>
+						<legend class="bx--label"><strong>Please select a Cuisine
+							<span style="color:red">*</span></strong></legend>
 						<ibm-radio-group name = "breakfastCuisine" formControlName="breakfastCuisine" (change)="onChangeBreakfast()">
 							<ibm-radio *ngFor="let cuisine of breakfasts"
 								[value]="cuisine.name" (click)='breakfastRadio = cuisine.name'>{{cuisine.name}}
@@ -27,7 +32,7 @@
 				<br>
 				<div ibmRow>
 					<div ibmCol [columnNumbers]="{'lg': 4,'md': 4, 'sm': 12}" >
-						<legend class="bx--label"><strong>Please select a dish</strong></legend>
+						<legend class="bx--label"><strong>Please select a dish<span style="color:red">*</span></strong></legend>
 						<div style="width: 300px">
 							<ibm-dropdown placeholder="Select" name = "breakfastDish"
 							formControlName="breakfastDish" (selected)="onSelectBreakfast()"> 
@@ -37,7 +42,7 @@
 					</div>
 
 					<div ibmCol [columnNumbers]="{'lg': 8,'md': 8, 'sm': 12}" >
-						<legend class="bx--label"><strong>Please enter a side dish</strong></legend>
+						<legend class="bx--label"><strong>Please enter a side dish<span style="color:red">*</span></strong></legend>
 						
 						<input ibmText name = "breakfastSideDish" formControlName="breakfastSideDish" style="width:300px">
 						
@@ -49,7 +54,7 @@
 				<p>Lunch</p><br><br>
 				<div ibmRow>
 					<div ibmCol [columnNumbers]="{'md': 6, 'sm': 12}">
-						<legend class="bx--label"><strong>Options</strong></legend>
+						<legend class="bx--label"><strong>Options<span style="color:red">*</span></strong></legend>
 						<ibm-radio-group name = "lunchOption" formControlName="lunchOption" (change)="onChangeLunch()">
 							<ibm-radio *ngFor="let lunch of lunchOptions"
 								[value]="lunch.name" (click)='lunchRadio = lunch.name'>{{lunch.name}}
@@ -62,7 +67,7 @@
 				<br>
 				<div ibmRow>
 					<div ibmCol [columnNumbers]="{'lg': 4,'md': 4, 'sm': 12}" >
-						<legend class="bx--label"><strong>Please select a dish</strong></legend>
+						<legend class="bx--label"><strong>Please select a dish<span style="color:red">*</span></strong></legend>
 						<div style="width: 300px">
 							<ibm-dropdown placeholder="Select" name = "lunchDish"
 							formControlName="lunchDish"> 
@@ -72,7 +77,7 @@
 					</div>
 
 					<div ibmCol [columnNumbers]="{'lg': 8,'md': 8, 'sm': 12}" >
-						<legend class="bx--label"><strong>Please enter a side dish</strong></legend>
+						<legend class="bx--label"><strong>Please enter a side dish<span style="color:red">*</span></strong></legend>
 						
 						<input ibmText name = "lunchSideDish" formControlName="lunchSideDish" style="width:300px">
 						
@@ -85,7 +90,8 @@
 				
 				<div ibmRow>
 					<div ibmCol [columnNumbers]="{'md': 2, 'sm': 12}">
-						<legend class="bx--label"><strong>Please select all toppings to be used in this pizza</strong></legend>
+						<legend class="bx--label"><strong>Please select all toppings to be used in this pizza
+							<span style="color:red">*</span></strong></legend>
 						<ibm-checkbox *ngFor="let item of dinnerToppings"  
 							(change)="onChangeTopping(item.topping,$event)">
 							{{item.topping}}

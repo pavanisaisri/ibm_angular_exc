@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PaginationModel,TableModel } from 'carbon-components-angular';
 import { DataServiceService } from '../../services/data-service.service';
 
@@ -51,6 +51,7 @@ export class CreateFormComponent implements OnInit {
   dinnerTableData = []
   checkedToppings = []
   dinnerRadio;
+  validator = false;
 
   constructor(private formBuilder: FormBuilder, private simpleModel: TableModel, private databaseService: DataServiceService){}
 
@@ -62,12 +63,12 @@ export class CreateFormComponent implements OnInit {
 
   ngOnInit() {
     this.createOrder = this.formBuilder.group({
-      breakfastCuisine: [''],
-      breakfastDish: [''],
-      breakfastSideDish: [''],
-      lunchOption: [''],
-      lunchDish: [''],
-      lunchSideDish: [''],
+      breakfastCuisine: ['', Validators.required],
+      breakfastDish: ['', Validators.required],
+      breakfastSideDish: ['', Validators.required],
+      lunchOption: ['', Validators.required],
+      lunchDish: ['', Validators.required],
+      lunchSideDish: ['', Validators.required],
     });
 
     this.model.pageLength = 10;
@@ -160,6 +161,18 @@ export class CreateFormComponent implements OnInit {
     }
 
     this.dinnerTableData = this.dinnerTableDataArray[0]
+
+
+    if(this.dinnerTableData.length>0){
+      if(this.createOrder.valid){
+        this.validator = true
+      }else{
+        this.validator = false
+      }
+        
+    }else{
+      this.validator = false
+    }
     
   }
 
